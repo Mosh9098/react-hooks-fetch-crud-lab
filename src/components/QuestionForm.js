@@ -11,15 +11,24 @@ function QuestionForm(props) {
   });
 
   function handleChange(event) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
+    const { name, value } = event.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    props.onSubmit(formData); 
+    setFormData({
+      prompt: "",
+      answer1: "",
+      answer2: "",
+      answer3: "",
+      answer4: "",
+      correctIndex: 0,
+    });
   }
 
   return (
